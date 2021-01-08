@@ -7,30 +7,21 @@
       
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link texto text-monospace text-uppercase font-weight-bold p-3" routerLink="/inicial">Home <span class="sr-only">(página atual)</span></a>
-            </li>
             
-            <div *ngIf='usuario.btnLogin()'>
+            
+            <div>
               <li class="nav-item">
                 <a class="nav-link texto text-monospace text-uppercase font-weight-bold p-3" 
-                routerLink="/logar">Login</a>
+                routerLink="/logar">Cadastros</a>
               </li>
             </div>
     
-            <div *ngIf='usuario.btnLogin()'>
+            <div>
               <li class="nav-item">
                 <a class="nav-link texto text-monospace text-uppercase font-weight-bold p-3" 
                 routerLink="/cadastrar">Cadastrar</a>
               </li>
-            </div>
-            
-            <div *ngIf='usuario.btnSair()'>
-              <li class="nav-item">
-                <a class="nav-link texto text-monospace text-uppercase font-weight-bold p-3" (click)='sair()'>Sair</a>
-              </li>
-            </div>
-           
+            </div>           
           </ul>
         </div>
       </nav>

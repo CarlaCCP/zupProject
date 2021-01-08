@@ -10,13 +10,10 @@ import { UsuarioService } from '../service/usuario.service';
 export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,
-    public usuario: UsuarioService) { }
+    public usuarioService: UsuarioService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  sair(){
-    this.router.navigate(['/login'])
-    localStorage.clear()
-  }
+ 
 }

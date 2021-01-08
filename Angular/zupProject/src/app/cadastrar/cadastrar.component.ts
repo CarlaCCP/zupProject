@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../model/usuario';
 import { UsuarioService } from '../service/usuario.service';
+import { environment } from 'src/environments/environment.prod';
+import { env } from 'process';
 
 @Component({
   selector: 'app-cadastrar',
@@ -12,24 +14,29 @@ export class CadastrarComponent implements OnInit {
 
   usuario: Usuario = new Usuario()
   senha: string
-  constructor( public usuarioService: UsuarioService, private router: Router) { }
+  
+  env = environment;
+  
+  cpf = env.cpf
+  constructor(public usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  conferirSenha(event: any){
-    this.senha = event.target.value
-  }
 
-  cadastrar(){
-    if (this.senha === this.usuario.senha){
-      this.usuarioService.cadastrar(this.usuario).subscribe((resp:Usuario) =>{
-        this.usuario = resp
-        this.router.navigate(['/login'])
-        window.alert('Usuario cadastrado com sucesso')
-      })
+  cadastrando() {
+    if (this.usuario.nome == null || this.usuario.email || this.usuario.cpf || this.usuario.dataNascimento) {
+      window.alert('Todos os campos são obrigatórios')
+      if (localStorage.getItem(this.usuario.cpf) == this.cpf) {
+        window.alert('erro')
+      }
     } else {
-      window.alert("Suas senhas não conferem")
+      this.usuarioService.cadastrar(this.usuario).subscribe((resp: Usuario) => {
+        this.usuario = resp
+        window.alert("Usuario cadastrado com sucesso")
+      })
     }
   }
+
+
 }

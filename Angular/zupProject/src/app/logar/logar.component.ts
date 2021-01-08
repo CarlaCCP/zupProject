@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioLogin } from '../model/usuarioLogin';
+
+import { Usuario } from '../model/usuario';
 import { UsuarioService } from '../service/usuario.service';
 
 @Component({
@@ -10,18 +11,27 @@ import { UsuarioService } from '../service/usuario.service';
 })
 export class LogarComponent implements OnInit {
 
-  usuarioLogin: UsuarioLogin = new UsuarioLogin()
-  constructor(private usuarioService: UsuarioService,
+  usuario: Usuario = new Usuario()
+  listaUsuarios: Usuario[]
+
+  idUsuario: number
+
+  constructor(public usuarioService: UsuarioService,
     private router: Router) { }
 
   ngOnInit() {
+    this.encontreTodos()
   }
 
-  entrar(){
-    this.usuarioService.logar(this.usuarioLogin).subscribe((resp: UsuarioLogin) => {
-      this.usuarioLogin = resp
-      localStorage.setItem('token', this.usuarioLogin.token)
-      this.router.navigate(['/inicial'])
+  encontreTodos(){
+    this.usuarioService.buscarTodos().subscribe((resp: Usuario [])=>{
+      this.listaUsuarios = resp
+    })
+  }
+
+  encontreId(){
+    this.usuarioService.getByIdUsuario(this.idUsuario).subscribe((resp: Usuario)=>{
+      this.usuario = resp
     })
   }
 }
