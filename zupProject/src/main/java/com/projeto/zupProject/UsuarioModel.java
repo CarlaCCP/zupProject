@@ -1,6 +1,6 @@
 package com.projeto.zupProject;
 
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
+
 
 import com.sun.istack.NotNull;
 
@@ -26,21 +24,18 @@ public class UsuarioModel {
 	@NotNull
 	private String nome;
 	
-	@Column
+	@Column(unique = true)
 	@NotNull
 	private String email;
 	
+	@Column(unique = true)
+	@NotNull
+	private String cpf;
+	
 	@Column
 	@NotNull
-	private int cpf;
+	private String dataNascimento;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date data = new java.sql.Date(System.currentTimeMillis());
-	
-	@NotNull
-	@Size(min = 2, max = 100)
-	private String senha;
-
 	public long getId() {
 		return id;
 	}
@@ -65,30 +60,23 @@ public class UsuarioModel {
 		this.email = email;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	public Date getData() {
-		return data;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 	
-	
+
 	
 }
