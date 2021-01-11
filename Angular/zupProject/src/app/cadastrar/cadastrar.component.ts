@@ -25,16 +25,15 @@ export class CadastrarComponent implements OnInit {
 
 
   cadastrando() {
-    if (this.usuario.nome == null || this.usuario.email || this.usuario.cpf || this.usuario.dataNascimento) {
+    if (this.usuario.nome == null || this.usuario.email == null || this.usuario.cpf == null || this.usuario.dataNascimento == null) {
       window.alert('Todos os campos são obrigatórios')
-      if (localStorage.getItem(this.usuario.cpf) == this.cpf) {
-        window.alert('erro')
-      }
     } else {
       this.usuarioService.cadastrar(this.usuario).subscribe((resp: Usuario) => {
         this.usuario = resp
         window.alert("Usuario cadastrado com sucesso")
+        this.router.navigate(['/logar'])
       })
+
     }
   }
 
